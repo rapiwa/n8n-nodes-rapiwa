@@ -1,5 +1,5 @@
 {
-  "name": "@rapiwa/n8n-nodes-rapiwa",
+  "name": "n8n-nodes-rapiwa",
   "version": "0.1.0",
   "description": "Rapiwa is a Low-Cost WhatsApp API for Developer and Users. This node package allows you to use Rapiwa in n8n.",
   "keywords": [
