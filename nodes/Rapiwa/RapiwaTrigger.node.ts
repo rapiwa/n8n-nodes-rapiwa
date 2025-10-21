@@ -9,7 +9,7 @@ export class RapiwaTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Rapiwa Incoming message Trigger',
 		name: 'rapiwaTrigger',
-		icon: 'file:rapiwa.svg',
+		icon: 'file:rapiwa-logo.svg',
 		group: ['trigger'],
 		version: 1,
 		subtitle: 'Incoming Message',
