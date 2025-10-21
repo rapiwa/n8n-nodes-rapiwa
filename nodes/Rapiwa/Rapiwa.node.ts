@@ -65,7 +65,6 @@ export class Rapiwa implements INodeType {
 				displayOptions: { show: { operation: ['sendWhatsAppMessage'] } },
 				options: [
 					{ name: 'Welcome Message', value: 'welcome' },
-					// { name: 'OTP Verification', value: 'otp' },
 					{ name: 'Promotional Offer', value: 'promo' },
 				],
 				default: 'welcome',
@@ -90,7 +89,7 @@ export class Rapiwa implements INodeType {
 				name: 'message',
 				type: 'string',
 				typeOptions: { alwaysOpenEditWindow: true },
-				default: '',
+				default: 'Hello from Rapiwa!',
 				placeholder: 'Hello from Rapiwa!',
 				description: 'Text message body or caption for media',
 				displayOptions: {
@@ -140,7 +139,8 @@ export class Rapiwa implements INodeType {
 
 		for (let i = 0; i < items.length; i++) {
 			const operation = this.getNodeParameter('operation', i) as string;
-			const number = (this.getNodeParameter('number', i) as string).replace(/\D/g, '');
+			const rawNumber = this.getNodeParameter('number', i);
+			const number = String(rawNumber).replace(/\D/g, '');
 
 			// ===== VERIFY NUMBER =====
 			if (operation === 'verifyWhatsAppNumber') {
