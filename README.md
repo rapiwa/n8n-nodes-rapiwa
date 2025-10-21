@@ -58,10 +58,10 @@ This package follows the official [n8n custom node development standards](https:
 
 ## Features
 
-- **Send WhatsApp Messages** — Send text or media messages directly via the Rapiwa API.  
-- **Verify Numbers** — Check if a given phone number is active on WhatsApp.  
-- **Incoming Webhooks** — Trigger n8n workflows when messages arrive.  
-- **Secure Authentication** — Uses your Rapiwa API Key with Bearer Token.  
+- **Send WhatsApp Messages** — Send text or media messages directly via the Rapiwa API.
+- **Verify Numbers** — Check if a given phone number is active on WhatsApp.
+- **Incoming Webhooks** — Trigger n8n workflows when messages arrive.
+- **Secure Authentication** — Uses your Rapiwa API Key with Bearer Token.
 - **Error Handling** — Follows n8n’s native error behavior and `continueOnFail()` support.
 
 ---
@@ -100,6 +100,7 @@ Before using the node, you must configure your Rapiwa API Key:
 - **Analytics & Insights:** Sync WhatsApp data with your CRM for real-time performance tracking.
 
 ---
+
 ## Node Operations
 
 ### 1\. Send WhatsApp Message
@@ -108,23 +109,16 @@ Send WhatsApp messages to your users directly from n8n.
 
 **Fields:**
 
-*   **Number** → Recipient’s number (e.g. 88017XXXXXXXX)
-    
-*   **Product Operation** → Choose between Welcome Message or Promotional Offer
-    
-*   **Message Type** → Text, Image, Video, or Document
-    
-*   **Message** → Text body or caption (for media)
-    
-*   **Media URL** → Public link for the media file
-    
+- **Number** → Recipient’s number (e.g. 88017XXXXXXXX)
+- **Product Operation** → Choose between Welcome Message or Promotional Offer
+- **Message Type** → Text, Image, Video, or Document
+- **Message** → Text body or caption (for media)
+- **Media URL** → Public link for the media file
 
 **Example use case:**
 
-*   Triggered when a new order is placed
-    
-*   Sends a WhatsApp confirmation message to the customer
-    
+- Triggered when a new order is placed
+- Sends a WhatsApp confirmation message to the customer
 
 ### 2\. Verify WhatsApp Number
 
@@ -132,39 +126,33 @@ Check if a given number is registered on WhatsApp before sending messages.
 
 **Fields:**
 
-*   **Number** → Recipient’s number (e.g. 88017XXXXXXXX)
-    
+- **Number** → Recipient’s number (e.g. 88017XXXXXXXX)
 
 The node will return:
 
-*   exists: true/false
-    
-*   jid (WhatsApp unique ID)
-    
-*   message (response description)
-    
+- exists: true/false
+- jid (WhatsApp unique ID)
+- message (response description)
 
 **Example use case:**
 
-*   Validate WhatsApp numbers before sending campaigns
-    
-*   Clean your contact list automatically
+- Validate WhatsApp numbers before sending campaigns
+- Clean your contact list automatically
 
 ---
 
 ## Trigger: Incoming Webhooks
 
- **Rapiwa Trigger:** Incoming Webhooks allows you to **receive incoming WhatsApp messages** directly into n8n workflows.
+**Rapiwa Trigger:** Incoming Webhooks allows you to **receive incoming WhatsApp messages** directly into n8n workflows.
 
 Use this to:
 
-*   Build chatbots
-    
-*   Capture inbound messages for automation
-    
-*   Log WhatsApp replies in databases or CRMs
+- Build chatbots
+- Capture inbound messages for automation
+- Log WhatsApp replies in databases or CRMs
 
 ---
+
 ## Support
 
 For technical support and assistance:
@@ -196,7 +184,7 @@ To run and test this node on your local machine:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/hasibulmahi/n8n-nodes-rapiwa.git
+   git clone https://github.com/rapiwa/n8n-nodes-rapiwa
    cd n8n-nodes-rapiwa
    ```
 2. **Install dependencies**
