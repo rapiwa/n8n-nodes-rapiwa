@@ -1,0 +1,20 @@
+{
+	"node": "n8n-nodes-base.Rapiwa",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Miscellaneous"
+	],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.rapiwa.com/getting-started"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.rapiwa.com/getting-started.html"
+			}
+		]
+	}
+}
