@@ -120,6 +120,8 @@ Send WhatsApp messages to your users directly from n8n.
 - Triggered when a new order is placed
 - Sends a WhatsApp confirmation message to the customer
 
+For detailed documentation, visit [Rapiwa Integration with n8n](https://docs.rapiwa.com/n8n.html)
+
 ### 2\. Verify WhatsApp Number
 
 Check if a given number is registered on WhatsApp before sending messages.
@@ -138,6 +140,8 @@ The node will return:
 
 - Validate WhatsApp numbers before sending campaigns
 - Clean your contact list automatically
+
+For detailed documentation, visit [Rapiwa Integration with n8n](https://docs.rapiwa.com/n8n.html)
 
 ---
 
@@ -160,7 +164,7 @@ For technical support and assistance:
 - **Email Support**: Contact our dedicated support team
 - **Implementation Help**: Get expert assistance with workflows
 
-For enterprise-level support or custom solutions, contact our solution engineers at sales@rapiwa.com
+For enterprise-level support or custom solutions, contact our solution engineers at support@rapiwa.com
 
 ---
 
@@ -192,19 +196,24 @@ To run and test this node on your local machine:
    npm install
    ```
 3. **Build the project**
+
    ```bash
    npm run build
    ```
-4. **Install the node into your local n8n instance:**
+4. **Run Tests:**
+   ```bash
+   npm run test
+   ```
+   > **Note:** Unit tests are included to ensure code quality. Please run tests before submitting a pull request.
+5. **Install the node into your local n8n instance:**
    ```bash
    npm link n8n-nodes-rapiwa
    ```
-   > **Note:** Unit tests are included to ensure code quality. Please run tests before submitting a pull request.
-5. **Start n8n:**
+6. **Start n8n:**
    ```bash
    n8n start
    ```
-6. **Test your node**
+7. **Test your node**
    - Open n8n in your browser (usually at `http://localhost:5678`)
    - Create a workflow and add your custom node to test its functionality
 
