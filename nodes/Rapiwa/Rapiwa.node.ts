@@ -141,9 +141,21 @@ export class Rapiwa implements INodeType {
 			const operation = this.getNodeParameter('operation', i) as string;
 			const rawNumber = this.getNodeParameter('number', i);
 			const number = String(rawNumber).replace(/\D/g, '');
+			const originalNumber = String(rawNumber);
 
 			// ===== VERIFY NUMBER =====
 			if (operation === 'verifyWhatsAppNumber') {
+				if (originalNumber.endsWith('@lid')) {
+					returnData.push({
+						success: true,
+						number: originalNumber,
+						exists: true,
+						message: 'Skipped verification — already verified (ends with @lid)',
+						jid: originalNumber,
+					});
+					continue;
+				}
+
 				const body = { number };
 				const options = {
 					method: 'POST' as const,
@@ -181,9 +193,15 @@ export class Rapiwa implements INodeType {
 
 			// ===== SEND MESSAGE =====
 			if (operation === 'sendWhatsAppMessage') {
+				const finalNumber = String(rawNumber).endsWith('@lid') ? String(rawNumber) : number;
+
 				const messageType = this.getNodeParameter('messageType', i) as string;
 				const productOperation = this.getNodeParameter('productOperation', i) as string;
-				const body: IDataObject = { number, message_type: messageType, productOperation };
+				const body: IDataObject = {
+					number: finalNumber,
+					message_type: messageType,
+					productOperation,
+				};
 
 				if (messageType === 'text') {
 					body.message = this.getNodeParameter('message', i) as string;
