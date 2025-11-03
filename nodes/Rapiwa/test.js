@@ -25,7 +25,7 @@ async function getData() {
 }
 
 function bigWork() {
-	// onek kajs
+	// Most of the work
 	return getData();
 }
 (async function () {
