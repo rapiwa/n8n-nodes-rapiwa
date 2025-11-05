@@ -32,3 +32,11 @@ function bigWork() {
 	const result = await bigWork();
 })();
 console.log('need to use the response');
+
+function resolveHumanStarship(obj, args, context, info) {
+	return Promise.all(
+		obj.starshipID.map((id) =>
+			context.db.loadStarshipByID(id).then((shipData) => new starship(shipData)),
+		),
+	);
+}
