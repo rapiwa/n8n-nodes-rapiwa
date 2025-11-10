@@ -40,3 +40,16 @@ function resolveHumanStarship(obj, args, context, info) {
 		),
 	);
 }
+
+const fetchPostById = async () => {
+	const response = fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+	method: 'POST';
+
+	if (!response.ok) {
+		throw new Error('Network is not established');
+	}
+	return (await response).json();
+};
+function func () {
+	const {data, error, isLoading} = useQuery (['users'], fetchUsers);
+}
