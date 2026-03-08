@@ -120,7 +120,7 @@ export class Rapiwa implements INodeType {
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
-		const returnData: IDataObject[] = [];
+		const returnData: INodeExecutionData[] = [];
 		const credentials = await this.getCredentials('rapiwaApi');
 		const apiKey = credentials.apiKey as string;
 
@@ -147,11 +147,14 @@ export class Rapiwa implements INodeType {
 			if (operation === 'verifyWhatsAppNumber') {
 				if (originalNumber.endsWith('@lid')) {
 					returnData.push({
-						success: true,
-						number: originalNumber,
-						exists: true,
-						message: 'Skipped verification — already verified (ends with @lid)',
-						jid: originalNumber,
+						json: {
+							success: true,
+							number: originalNumber,
+							exists: true,
+							message: 'Skipped verification — already verified (ends with @lid)',
+							jid: originalNumber,
+						},
+						pairedItem: { item: i },
 					});
 					continue;
 				}
@@ -173,18 +176,24 @@ export class Rapiwa implements INodeType {
 					);
 
 					returnData.push({
-						success: !!response.success,
-						number: response.data?.number || number,
-						exists: !!response.data?.exists,
-						message: response.data?.message,
-						jid: response.data?.jid || null,
+						json: {
+							success: !!response.success,
+							number: response.data?.number || number,
+							exists: !!response.data?.exists,
+							message: response.data?.message,
+							jid: response.data?.jid || null,
+						},
+						pairedItem: { item: i },
 					});
 				} catch (error: any) {
 					returnData.push({
-						success: false,
-						number,
-						exists: false,
-						error: error.message,
+						json: {
+							success: false,
+							number,
+							exists: false,
+							error: error.message,
+						},
+						pairedItem: { item: i },
 					});
 				}
 
@@ -236,10 +245,16 @@ export class Rapiwa implements INodeType {
 							message: response.error || 'Rapiwa API returned success: false',
 						});
 					}
-					returnData.push(response as IDataObject);
+					returnData.push({
+						json: response as IDataObject,
+						pairedItem: { item: i },
+					});
 				} catch (error: any) {
 					if (this.continueOnFail()) {
-						returnData.push({ error: error.message });
+						returnData.push({
+							json: { error: error.message },
+							pairedItem: { item: i },
+						});
 						continue;
 					}
 					throw error;
@@ -247,6 +262,6 @@ export class Rapiwa implements INodeType {
 			}
 		}
 
-		return [returnData.map((d) => ({ json: d }))];
+		return [returnData];
 	}
 }
