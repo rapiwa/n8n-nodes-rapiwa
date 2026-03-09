@@ -164,7 +164,6 @@ export class Rapiwa implements INodeType {
 					method: 'POST' as const,
 					url: 'https://app.rapiwa.com/api/verify-whatsapp',
 					body,
-					json: true,
 					headers: { Authorization: `Bearer ${apiKey}` },
 				};
 
@@ -229,7 +228,6 @@ export class Rapiwa implements INodeType {
 					method: 'POST' as const,
 					url: 'https://app.rapiwa.com/api/send-message',
 					body,
-					json: true,
 					headers: { Authorization: `Bearer ${apiKey}` },
 				};
 
