@@ -184,13 +184,14 @@ export class Rapiwa implements INodeType {
 						},
 						pairedItem: { item: i },
 					});
-				} catch (error: any) {
+				} catch (error: unknown) {
+					const errorMessage = error instanceof Error ? error.message : String(error);
 					returnData.push({
 						json: {
 							success: false,
 							number,
 							exists: false,
-							error: error.message,
+							error: errorMessage,
 						},
 						pairedItem: { item: i },
 					});
@@ -247,10 +248,11 @@ export class Rapiwa implements INodeType {
 						json: response as IDataObject,
 						pairedItem: { item: i },
 					});
-				} catch (error: any) {
+				} catch (error: unknown) {
+					const errorMessage = error instanceof Error ? error.message : String(error);
 					if (this.continueOnFail()) {
 						returnData.push({
-							json: { error: error.message },
+							json: { error: errorMessage },
 							pairedItem: { item: i },
 						});
 						continue;

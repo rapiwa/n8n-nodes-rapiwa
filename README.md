@@ -14,7 +14,7 @@
   <a href="https://www.npmjs.com/package/n8n-nodes-rapiwa">
     <img src="https://img.shields.io/npm/v/n8n-nodes-rapiwa.svg?style=flat-square" alt="npm version" />
   </a>
-  <a href="https://github.com/WhatsAble/n8n-nodes-rapiwa/blob/main/LICENSE.md">
+  <a href="https://github.com/rapiwa/n8n-nodes-rapiwa/blob/main/LICENSE.md">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License: MIT" />
   </a>
   <a href="https://community.n8n.io">
@@ -217,13 +217,13 @@ To run and test this node on your local machine:
    - Open n8n in your browser (usually at `http://localhost:5678`)
    - Create a workflow and add your custom node to test its functionality
 
-> **Note:** Make sure you have [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) installed on your machine.
+> **Note:** Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
 ---
 
 ### Reporting Issues
 
-- If you find a bug or have a feature request, please [open an issue](https://github.com/hasibulmahi/n8n-nodes-rapiwa/issues) with details and steps to reproduce.
+- If you find a bug or have a feature request, please [open an issue](https://github.com/rapiwa/n8n-nodes-rapiwa/issues) with details and steps to reproduce.
 
 ### Code of Conduct
 
