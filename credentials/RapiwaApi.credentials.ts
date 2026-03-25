@@ -8,6 +8,7 @@ import {
 export class RapiwaApi implements ICredentialType {
 	name = 'rapiwaApi';
 	displayName = 'Rapiwa API';
+	icon: 'file:rapiwa.svg' = 'file:rapiwa.svg';
 	documentationUrl = 'https://docs.rapiwa.com';
 
 	properties: INodeProperties[] = [
@@ -35,9 +36,6 @@ export class RapiwaApi implements ICredentialType {
 		request: {
 			method: 'GET',
 			url: 'https://app.rapiwa.com/api/verify-device-key',
-			headers: {
-				Authorization: '=Bearer {{$credentials.apiKey}}',
-			},
 		},
 	};
 }

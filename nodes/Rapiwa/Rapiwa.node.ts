@@ -4,6 +4,7 @@ import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	JsonObject,
 	NodeApiError,
 } from 'n8n-workflow';
 
@@ -121,8 +122,6 @@ export class Rapiwa implements INodeType {
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
-		const credentials = await this.getCredentials('rapiwaApi');
-		const apiKey = credentials.apiKey as string;
 
 		const getMimeType = (type: string): string => {
 			switch (type) {
@@ -164,7 +163,6 @@ export class Rapiwa implements INodeType {
 					method: 'POST' as const,
 					url: 'https://app.rapiwa.com/api/verify-whatsapp',
 					body,
-					headers: { Authorization: `Bearer ${apiKey}` },
 				};
 
 				try {
@@ -186,15 +184,14 @@ export class Rapiwa implements INodeType {
 					});
 				} catch (error: unknown) {
 					const errorMessage = error instanceof Error ? error.message : String(error);
-					returnData.push({
-						json: {
-							success: false,
-							number,
-							exists: false,
-							error: errorMessage,
-						},
-						pairedItem: { item: i },
-					});
+					if (this.continueOnFail()) {
+						returnData.push({
+							json: { error: errorMessage },
+							pairedItem: { item: i },
+						});
+						continue;
+					}
+					throw new NodeApiError(this.getNode(), error as JsonObject);
 				}
 
 				continue;
@@ -229,7 +226,6 @@ export class Rapiwa implements INodeType {
 					method: 'POST' as const,
 					url: 'https://app.rapiwa.com/api/send-message',
 					body,
-					headers: { Authorization: `Bearer ${apiKey}` },
 				};
 
 				try {
@@ -257,7 +253,7 @@ export class Rapiwa implements INodeType {
 						});
 						continue;
 					}
-					throw error;
+					throw new NodeApiError(this.getNode(), error as JsonObject);
 				}
 			}
 		}
