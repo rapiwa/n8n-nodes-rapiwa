@@ -1,10 +1,8 @@
 {
-	"node": "n8n-nodes-rapiwa.rapiwa",
+	"node": "n8n-nodes-rapiwa.rapiwaTrigger",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": [
-		"Miscellaneous"
-	],
+	"categories": ["Communication"],
 	"resources": {
 		"credentialDocumentation": [
 			{
@@ -13,7 +11,7 @@
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.rapiwa.com/getting-started.html"
+				"url": "https://docs.rapiwa.com/n8n.html"
 			}
 		]
 	}

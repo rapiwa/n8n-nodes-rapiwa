@@ -6,6 +6,8 @@ import {
 	INodeTypeDescription,
 	JsonObject,
 	NodeApiError,
+	type NodeConnectionType,
+	NodeConnectionTypes,
 } from 'n8n-workflow';
 
 export class Rapiwa implements INodeType {
@@ -16,9 +18,10 @@ export class Rapiwa implements INodeType {
 		group: ['output'],
 		version: 1,
 		description: 'Send and verify WhatsApp numbers via Rapiwa API',
+		subtitle: '={{$parameter["operation"]}}',
 		defaults: { name: 'Rapiwa' },
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main] as [NodeConnectionType],
+		outputs: [NodeConnectionTypes.Main] as [NodeConnectionType],
 		credentials: [{ name: 'rapiwaApi', required: true }],
 
 		properties: [

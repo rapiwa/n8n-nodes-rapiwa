@@ -1,8 +1,11 @@
 import {
+	IHookFunctions,
 	IWebhookFunctions,
 	INodeType,
 	INodeTypeDescription,
 	IWebhookResponseData,
+	type NodeConnectionType,
+	NodeConnectionTypes,
 } from 'n8n-workflow';
 
 export class RapiwaTrigger implements INodeType {
@@ -17,12 +20,12 @@ export class RapiwaTrigger implements INodeType {
 		defaults: { name: 'Rapiwa Trigger' },
 		credentials: [{ name: 'rapiwaApi', required: true }],
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionTypes.Main] as [NodeConnectionType],
 		webhooks: [
 			{
 				name: 'default',
-				httpMethod: 'POST',
-				responseMode: 'onReceived',
+				httpMethod: '={{$parameter["httpMethod"]}}',
+				responseMode: '={{$parameter["responseMode"]}}',
 				path: 'rapiwa-webhook',
 			},
 		],
@@ -62,13 +65,37 @@ export class RapiwaTrigger implements INodeType {
 		],
 	};
 
-	// ===== Execute webhook trigger =====
+	webhookMethods = {
+		default: {
+			async checkExists(this: IHookFunctions): Promise<boolean> {
+				const staticData = this.getWorkflowStaticData('node');
+				return staticData.webhookUrl !== undefined;
+			},
+			async create(this: IHookFunctions): Promise<boolean> {
+				const webhookUrl = this.getNodeWebhookUrl('default');
+				const staticData = this.getWorkflowStaticData('node');
+				if (webhookUrl) {
+					staticData.webhookUrl = webhookUrl;
+					this.logger.info(
+						`Rapiwa webhook URL (configure this URL in your Rapiwa dashboard): ${webhookUrl}`,
+					);
+				}
+				return true;
+			},
+			async delete(this: IHookFunctions): Promise<boolean> {
+				const staticData = this.getWorkflowStaticData('node');
+				delete staticData.webhookUrl;
+				return true;
+			},
+		},
+	};
+
 	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
 		const req = this.getRequestObject();
 		const body = req.body || {};
 		const headers = req.headers;
 
-		this.logger.info('📩 Rapiwa Webhook received', { headers, body });
+		this.logger.info('Rapiwa Webhook received', { headers, body });
 
 		return {
 			webhookResponse: { success: true, message: 'Received OK' },
